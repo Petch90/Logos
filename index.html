@@ -15,20 +15,39 @@
             <button onclick="signIn()">Accedi</button>
             <button onclick="signUp()">Registrati</button>
         </div>
-        <div id="appointments" style="display:none;">
+        <div id="userPanel" style="display:none;">
             <h2>I tuoi appuntamenti</h2>
+            <div id="calendar"></div>
             <div id="appointmentList"></div>
-            <input type="date" id="appointmentDate">
-            <input type="time" id="appointmentTime">
-            <button onclick="addAppointment()">Aggiungi appuntamento</button>
+        </div>
+        <div id="adminPanel" style="display:none;">
+            <h2>Pannello Amministratore</h2>
+            <button onclick="showUserManagement()">Gestione Utenti</button>
+            <button onclick="showAppointmentManagement()">Gestione Appuntamenti</button>
+            <div id="userManagement" style="display:none;">
+                <h3>Gestione Utenti</h3>
+                <input type="email" id="newUserEmail" placeholder="Email nuovo utente">
+                <input type="password" id="newUserPassword" placeholder="Password nuovo utente">
+                <button onclick="createUser()">Crea Utente</button>
+                <div id="userList"></div>
+            </div>
+            <div id="appointmentManagement" style="display:none;">
+                <h3>Gestione Appuntamenti</h3>
+                <div id="adminAppointmentList"></div>
+            </div>
+        </div>
+    </div>
+    <div id="appointmentModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalDate"></h2>
+            <div id="timeSlots"></div>
         </div>
     </div>
 
-    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
-    
     <script src="app.js"></script>
 </body>
 </html>
