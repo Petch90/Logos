@@ -30,26 +30,33 @@ function signIn() {
     const password = document.getElementById('password').value;
     auth.signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
+            console.log("Autenticazione riuscita", userCredential);
             currentUser = userCredential.user;
             checkUserRole();
         })
         .catch((error) => {
             console.error("Errore di accesso:", error);
+            alert("Errore di accesso: " + error.message);
         });
 }
 
 function checkUserRole() {
+    console.log("Controllo ruolo per l'utente:", currentUser.uid);
     db.collection('users').doc(currentUser.uid).get()
         .then((doc) => {
+            console.log("Dati utente:", doc.data());
             if (doc.exists && doc.data().isAdmin) {
+                console.log("Utente è admin");
                 showAdminPanel();
             } else {
+                console.log("Utente non è admin");
                 showUserPanel();
             }
         })
         .catch((error) => {
             console.error("Errore nel recupero del ruolo utente:", error);
         });
+}
 }
 
 function showAdminPanel() {
